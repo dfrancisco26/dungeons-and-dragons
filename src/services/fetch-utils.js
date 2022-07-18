@@ -29,6 +29,6 @@ export async function getClass() {
   
   const { data } = await rawData.json();
   
-  console.log(data.results);
+  
   return data;
 }

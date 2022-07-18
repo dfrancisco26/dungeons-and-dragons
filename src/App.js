@@ -5,7 +5,7 @@ import CreateCharacter from './CreateCharacter';
 function App() {
   return (
     <div className="App">
-      <Auth />
+      {/* <Auth /> */}
       <br></br>
       <hr></hr>
       <CreateCharacter />
