@@ -24,10 +24,11 @@ export async function logout() {
 }
 
 
-export async function getClass(filter) {
-  const rawData = await fetch(`/.netlify/functions/dnd?dndnQuery${filter}`);
+export async function getClass() {
+  const rawData = await fetch(`/.netlify/functions/dnd?classes`);
   
-  const data = await rawData.json();
+  const { data } = await rawData.json();
   
-  return data.results;
+  console.log(data.results);
+  return data;
 }

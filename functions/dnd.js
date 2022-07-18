@@ -1,4 +1,4 @@
-onst fetch = require('node-fetch');
+const fetch = require('node-fetch');
 require('dotenv').config();
 
 // this line tells chrome to ignore CORS policy just in case
@@ -8,14 +8,14 @@ const headers = {
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
 };
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   
   try {
   
-    const response = await fetch (`https://api.open5e.com/classes/${event.queryStringParameters.dndQuery}`, 
+    const response = await fetch (`https://api.open5e.com/classes/`, 
     );
     const data = await response.json();
-    const json = JSON.stringify(data);
+    const json = JSON.stringify({ data });
     
     return {
       statusCode: 200,
