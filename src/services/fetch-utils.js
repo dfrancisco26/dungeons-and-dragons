@@ -22,3 +22,12 @@ export async function signIn(email, password) {
 export async function logout() {
   await client.auth.signOut();
 }
+
+
+export async function getClass(filter) {
+  const rawData = await fetch(`/.netlify/functions/dnd?dndnQuery${filter}`);
+  
+  const data = await rawData.json();
+  
+  return data.results;
+}
