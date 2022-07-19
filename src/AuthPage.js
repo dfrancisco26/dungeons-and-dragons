@@ -1,6 +1,7 @@
 import React from 'react';
 import { signIn, signUp } from './services/fetch-utils';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function Auth({ setUser }) {
 
@@ -8,7 +9,8 @@ export default function Auth({ setUser }) {
   const [password, setPassword] = useState('');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-      
+  const { push } = useHistory();
+
   async function handleSubmit(e) {
       
     e.preventDefault();
@@ -16,6 +18,8 @@ export default function Auth({ setUser }) {
     const user = await signUp(email, password);
       
     setUser(user);
+    push('Profile');
+
   }
       
       
@@ -26,6 +30,7 @@ export default function Auth({ setUser }) {
     const user = await signIn(loginEmail, loginPassword);
       
     setUser(user);
+    push('Profile');
   }
       
   return (

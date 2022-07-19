@@ -28,7 +28,7 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link to ="/">Home</Link>
+                <Link to ="/Profile">Profile</Link>
               </li>
               <li>
                 <Link to = "/CreateCharacter">Create a new character</Link>
@@ -41,16 +41,19 @@ function App() {
         <Switch>
           <Route exact path="/">
             {
-              user ? <Redirect to="/Profile" /> : <Auth setUser={setUser} />
+              !user ? <Auth setUser={setUser} /> : <Redirect to="/" />
             }
           </Route>
-          <Route exact path="/CreateCharacter" />
-          {
-            !user ? <Auth setUser={setUser} /> : <Redirect to="/CreateCharacter" />
-          }
-          <br></br>
-          <hr></hr>
-          <CreateCharacter />
+          <Route exact path="/CreateCharacter">
+            {
+              user ? <CreateCharacter /> : <Redirect to="/" />
+            }
+          </Route>
+          <Route exact path="/Profile">
+            {
+              user ? <Profile /> : <Redirect to="/" />
+            }
+          </Route>
         </Switch>
       </Router>
     </div>
