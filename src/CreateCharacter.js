@@ -13,12 +13,17 @@ export default function CreateCharacter() {
   const [raceQuery, setRaceQuery] = useState('');
   const [name, setName] = useState('');
 
+
+  // const race = dRace.find(singlerace => singlerace.name === raceInput); (just in case we can no longer hit the API for single races/classes)
+
+
+
   const sheet = {
     name: name,
-    class: setClassInput,
-    race: setRaceInput,
+    class: classInput,
+    race: raceInput,
   };
-  
+
 
   async function storeRaces() {
     const data = await getRace(raceQuery);
@@ -46,6 +51,7 @@ export default function CreateCharacter() {
     setClassQuery(classInput);
     setRaceQuery(raceInput);
     const data = await getClass(classInput);
+
     const rdata = await getRace(raceInput);
     setDrace(rdata.results);
     setDclass(data.results); //this could be an issue
@@ -64,7 +70,8 @@ export default function CreateCharacter() {
       <form onSubmit={handleSubmit}>
         <label>Name<input value={name} onChange = {e => setName(e.target.value)}></input></label>
         <label>Class
-          <select required onSubmit={e => setDclass(e.target.value)}>
+          <select required onChange={e => setClassInput(e.target.value)}>
+            <option value={''}></option> 
             {
               dClass.map((Dclass) => <option value={Dclass.data} className='class-selection' key = {Dclass.slug} > 
                 {
@@ -74,7 +81,8 @@ export default function CreateCharacter() {
             }
           </select></label>
         <label>Race 
-          <select onSubmit={e => setDrace(e.target.value)}>
+          <select onChange={e => setRaceInput(e.target.value)}>
+            <option value={''}></option>
             {
               dRace.map((Drace) => <option value={Drace.data} className='race-selection' key = {Drace.slug} >
                 {

@@ -38,6 +38,7 @@ function App() {
             </ul>
           </nav>
         </div>
+        <img className='die' src='https://clipart.world/wp-content/uploads/2021/05/D20-clipart-transparent-png-4.png' alt='die'></img>
         <Switch>
           <Route exact path="/">
             {
