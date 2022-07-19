@@ -1,12 +1,13 @@
 const fetch = require('node-fetch');
 require('dotenv').config();
 
-// this line tells chrome to ignore CORS policy just in case
+
 const headers = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
 };
+
 
 exports.handler = async (event) => {
   
