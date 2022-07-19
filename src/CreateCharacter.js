@@ -46,9 +46,7 @@ export default function CreateCharacter() {
     setClassQuery(classInput);
     setRaceQuery(raceInput);
     const data = await getClass(classInput);
-    console.log(data);
     const rdata = await getRace(raceInput);
-    console.log(rdata);
     setDrace(rdata.results);
     setDclass(data.results); //this could be an issue
     setClassInput('');
