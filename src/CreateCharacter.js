@@ -1,13 +1,24 @@
 import { useState, useEffect } from 'react';
+import { checkError } from './services/client';
 import { getClass } from './services/fetch-utils';
 import { getRace } from './services/fetch-utils';
+import { createCharacter } from './services/fetch-utils';
+
 export default function CreateCharacter() {
   const [dClass, setDclass] = useState([]);
   const [dRace, setDrace] = useState([]);
-  const [classInput, setClassInput] = useState('');
+  const [classInput, setClassInput] = useState('barbarian');
   const [classQuery, setClassQuery] = useState('');
-  const [raceInput, setRaceInput] = useState('');
+  const [raceInput, setRaceInput] = useState('dwarf');
   const [raceQuery, setRaceQuery] = useState('');
+  const [name, setName] = useState('');
+
+  const sheet = {
+    name: name,
+    class: setClassInput,
+    race: setRaceInput,
+  };
+  
 
   async function storeRaces() {
     const data = await getRace(raceQuery);
@@ -36,17 +47,22 @@ export default function CreateCharacter() {
     setRaceQuery(raceInput);
     const data = await getClass(classInput);
     const rdata = await getRace(raceInput);
-    setDrace(rdata.data.results);
-    setDclass(data.data.results); //this could be an issue
+    setDrace(rdata.results);
+    setDclass(data.results); //this could be an issue
     setClassInput('');
     setRaceInput('');
+    setName('');
+    
+
+    const response = await createCharacter(sheet);
+    return checkError(response);
   }
 
 
   return (
     <><div>
       <form onSubmit={handleSubmit}>
-        <label>Name<input></input></label>
+        <label>Name<input value={name} onChange = {e => setName(e.target.value)}></input></label>
         <label>Class
           <select required onSubmit={e => setDclass(e.target.value)}>
             {

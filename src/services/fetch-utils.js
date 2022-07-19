@@ -1,4 +1,5 @@
-import { client } from './client';
+
+import { checkError, client } from './client';
 
 export async function signUp(email, password) {
 
@@ -37,6 +38,21 @@ export async function getRace() {
   const rawData = await fetch(`/.netlify/functions/dndr?races`);
 
   const { data } = await rawData.json();
-  
   return data;
 }
+
+export async function createCharacter(sheet) {
+  const response = await client
+    .from('sheets')
+    .insert(sheet);
+  return checkError(response);
+}
+
+export async function getCharacter(id) {
+  const response = await client
+    .from('sheets')
+    .select('*')
+    .match({ id })
+    .single();
+  return checkError(response);
+} 
