@@ -1,3 +1,13 @@
+.App {
+  /* CSS HEX */
+--pale-silver: #d8cbc7ff;
+--golden-brown: #9a6d38ff;
+--pine-tree: #1f271bff;
+--slate-gray: #627c85ff;
+--persian-plum: #70161eff;
+}
+
+
 .auth {
   display: flex;
   flex-direction: column;
@@ -19,4 +29,21 @@
   padding: 10px;
   max-width: fit-content;
   border-radius: 5px;
+}
+
+
+.die {
+  height: 100px;
+  animation: infinite-spinning 3s;
+  animation-iteration-count: infinite;
+  flex-direction: row-reverse;
+}
+
+@keyframes infinite-spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
