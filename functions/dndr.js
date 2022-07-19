@@ -7,7 +7,7 @@ const headers = {
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
 };
 
-exports.handler = async (event) => {
+exports.handler = async () => {
   
   try {
   
