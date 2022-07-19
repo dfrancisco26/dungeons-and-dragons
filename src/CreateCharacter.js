@@ -40,7 +40,6 @@ export default function CreateCharacter() {
     setDclass(data.data.results); //this could be an issue
     setClassInput('');
     setRaceInput('');
-    console.log(rdata);
   }
 
 
@@ -51,13 +50,24 @@ export default function CreateCharacter() {
         <label>Class
           <select required onSubmit={e => setDclass(e.target.value)}>
             {
-              dClass.map((Dclass) => <option value={Dclass.data} className='selections' key = {Dclass.slug} > 
+              dClass.map((Dclass) => <option value={Dclass.data} className='class-selection' key = {Dclass.slug} > 
                 {
                   Dclass.name
                 }
               </option>)
             }
           </select></label>
+        <label>Race 
+          <select onSubmit={e => setDrace(e.target.value)}>
+            {
+              dRace.map((Drace) => <option value={Drace.data} className='race-selection' key = {Drace.slug} >
+                {
+                  Drace.name
+                }
+              </option>)
+            }
+          </select>
+        </label>
         <button>Submit Selection</button>
       </form>
     </div>
