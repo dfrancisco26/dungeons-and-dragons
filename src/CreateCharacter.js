@@ -3,8 +3,17 @@ import { getClass } from './services/fetch-utils';
 import { getRace } from './services/fetch-utils';
 export default function CreateCharacter() {
   const [dClass, setDclass] = useState([]);
+  const [dRace, setDrace] = useState([]);
   const [classInput, setClassInput] = useState('');
   const [classQuery, setClassQuery] = useState('');
+  const [raceInput, setRaceInput] = useState('');
+  const [raceQuery, setRaceQuery] = useState('');
+
+  async function storeRaces() {
+    const data = await getRace(raceQuery);
+
+    setDrace(data.results);
+  }
 
   async function storeClasses() {
     const data = await getClass(classQuery);
@@ -15,23 +24,25 @@ export default function CreateCharacter() {
 
   useEffect(() => {
     storeClasses();
+    storeRaces();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // might need separate useEffect for races
 
   async function handleSubmit(e) {
 
     e.preventDefault();
     
     setClassQuery(classInput);
-    
+    setRaceQuery(raceInput);
     const data = await getClass(classInput);
-  
+    const rdata = await getRace(raceInput);
+    setDrace(rdata.data.results);
     setDclass(data.data.results); //this could be an issue
     setClassInput('');
-  
+    setRaceInput('');
+    console.log(rdata);
   }
 
-  getRace();
 
   return (
     <><div>
