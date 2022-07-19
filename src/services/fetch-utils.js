@@ -48,11 +48,11 @@ export async function createCharacter(sheet) {
   return checkError(response);
 }
 
-export async function getCharacter(id) {
+export async function getCharacter() {
   const response = await client
     .from('sheets')
-    .select('*')
-    .match({ id })
-    .single();
+    .select('*, user_id');
   return checkError(response);
 } 
+    
+    
