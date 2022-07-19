@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getClass } from './services/fetch-utils';
-
+import { getRace } from './services/fetch-utils';
 export default function CreateCharacter() {
   const [dClass, setDclass] = useState([]);
   const [classInput, setClassInput] = useState('');
@@ -31,7 +31,7 @@ export default function CreateCharacter() {
   
   }
 
-
+  getRace();
 
   return (
     <><div>

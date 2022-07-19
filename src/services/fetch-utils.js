@@ -32,3 +32,11 @@ export async function getClass() {
   
   return data;
 }
+
+export async function getRace() {
+  const rawData = await fetch(`/.netlify/functions/dndr?races`);
+
+  const { data } = await rawData.json();
+  console.log(data);
+  return data;
+}
