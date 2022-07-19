@@ -6,8 +6,8 @@ export default function Profile() {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
-    async function fetch(id) {
-      const data = await getCharacter(id);
+    async function fetch() {
+      const data = await getCharacter();
       console.log(data);
       setCharacters(data);
     }

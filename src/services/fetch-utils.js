@@ -51,8 +51,13 @@ export async function createCharacter(sheet) {
 export async function getCharacter() {
   const response = await client
     .from('sheets')
-    .select('*, user_id');
-  return checkError(response);
-} 
+    .select('*');
     
+  console.log(response);
+  return checkError(response);
+}
+
+
+
+
     
