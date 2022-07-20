@@ -39,11 +39,18 @@ body {
   max-width: fit-content;
   border: 4px solid black;
   margin: 50px;
-  color: antiquewhite;
+  color: var(--persian-plum);
+  background-color: var(--pale-silver);
+  opacity: 85%;
+  border-radius: 10px;
+  max-width: 20%;
+  padding: 10px;
+  display: block;
+  
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 20px 32px 0 var(--slate-gray);
 }
 
 
