@@ -53,7 +53,6 @@ export async function getCharacter() {
     .from('sheets')
     .select('*');
     
-  console.log(response);
   return checkError(response);
 }
 

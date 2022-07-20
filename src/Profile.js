@@ -8,7 +8,6 @@ export default function Profile() {
   useEffect(() => {
     async function fetch() {
       const data = await getCharacter();
-      console.log(data);
       setCharacters(data);
     }
     fetch();
