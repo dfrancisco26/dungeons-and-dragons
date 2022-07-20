@@ -17,8 +17,7 @@ export default function Profile() {
     <><>
       {characters.map((character) => <div className='card' key={`${character.id}`}>
         <h1>{character.name}</h1>
-        <h2>{character.class}</h2>
-        <h2>{character.race}</h2>
+        <h2>{character.race} {character.class}</h2>
       </div>)}
     </><div>Profile</div></>
   );
