@@ -14,6 +14,12 @@ export default function Profile() {
     fetch();
   }, []);
   return (
-    <div>Profile</div>
+    <><>
+      {characters.map((character) => <div className='card' key={`${character.id}`}>
+        <h1>{character.name}</h1>
+        <h2>{character.class}</h2>
+        <h2>{character.race}</h2>
+      </div>)}
+    </><div>Profile</div></>
   );
 }
