@@ -24,12 +24,14 @@ export default function Detail() {
     <div>
       <h1>{character.name}</h1>
       <h2>{character.race} {character.class}</h2>
-      <p>Strength: {character.strength}</p>
-      <p>Dexterity: {character.dexterity}</p>
-      <p>Constitution: {character.constitution}</p>
-      <p>Intelligence: {character.intelligence}</p>
-      <p>Wisdom: {character.wisdom}</p>
-      <p>Charisma: {character.charisma}</p>
+      <div id='abilities'>
+        <p>Strength: {character.strength}</p>
+        <p>Dexterity: {character.dexterity}</p>
+        <p>Constitution: {character.constitution}</p>
+        <p>Intelligence: {character.intelligence}</p>
+        <p>Wisdom: {character.wisdom}</p>
+        <p>Charisma: {character.charisma}</p>
+      </div>
     </div>);
     
   
