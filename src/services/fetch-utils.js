@@ -56,6 +56,15 @@ export async function getCharacter() {
   return checkError(response);
 }
 
+export async function getSingleCard(id) {
+  const response = await client
+    .from('sheets')
+    .select('*')
+    .match({ id })
+    .single();
+  return checkError(response);
+}
+
 
 
 
