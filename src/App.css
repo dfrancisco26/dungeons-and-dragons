@@ -82,7 +82,7 @@ body {
 }
 
 .createchar-form {
-  background-color: rgba(112, 128, 144, .9);
+  background-color: rgba(112, 128, 144, .85);
   max-width: 25%;
   padding: 10px;
   margin: 12px;
@@ -108,12 +108,28 @@ body {
   background-color: red;
  }
 
- #abilities{
-  background-color: var(--slate-gray);
+ #update-abilities-form {
+  background-color: rgba(112, 128, 144, .85);
   color: white;
  }
 
- #update-abilities-form {
-  background-color: var(--slate-gray);
+ #char-and-stats {
+  background-color: rgba(112, 128, 144, .85);
   color: white;
+  width: 30%;
+  border-radius: 12px;
+  display: flex;
+  margin: 0px 0px 40px 15px;
+ }
+
+ #abilities {
+  margin-left: 60px;
+ }
+
+ #char-name {
+  margin: 0px 0px 0px 10px;
+ }
+
+ #char-rc {
+  margin: 0px 0px 0px 10px;
  }

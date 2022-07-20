@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 import { deleteCharacter, getSingleCard, updateCharacter } from './services/fetch-utils';
 import { useHistory } from 'react-router-dom';
 
-
-
 export default function Detail() {
   const [character, setCharacters] = useState({});
   const params = useParams();
@@ -16,10 +14,10 @@ export default function Detail() {
   const [intelligence, setIntelligence] = useState(1);
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
-
-
+  
+  
   const sheet = {
-
+    
     strength: strength,
     dexterity: dexterity,
     constitution: constitution,
@@ -28,10 +26,19 @@ export default function Detail() {
     charisma: charisma
   };
 
+  useEffect(() => {
+    async function onLoad() {
+      const data = await getSingleCard(params.id);
+      setCharacters(data);
+  
+    }
+    onLoad();
+  }, [params.id]);
+  
   async function handleUpdateCharacter(e) {
     e.preventDefault();
     await updateCharacter(params.id, sheet);
-
+    
     push('/profile');
   }
   
@@ -41,30 +48,27 @@ export default function Detail() {
     push('/profile');
   }
 
-  useEffect(() => {
-    async function onLoad() {
-      const data = await getSingleCard(params.id);
-      setCharacters(data);
-
-    }
-    onLoad();
-  }, [params.id]);
   return (
     <div>
-      <h1>{character.name}</h1>
-      <h2>{character.race} {character.class}</h2>
-      <div id='abilities'>
-        <p>Strength: {character.strength}</p>
-        <p>Dexterity: {character.dexterity}</p>
-        <p>Constitution: {character.constitution}</p>
-        <p>Intelligence: {character.intelligence}</p>
-        <p>Wisdom: {character.wisdom}</p>
-        <p>Charisma: {character.charisma}</p>
+      <div id='char-and-stats'>
+        <div id='char-info'>
+          <h1 id='char-name'>{character.name}</h1>
+          <h2 id='char-rc'>{character.race} {character.class}</h2>
+          <img src={`./assets/${character.race}.png`}></img>
+        </div>
+        <div id='abilities'>
+          <p>Strength: {character.strength}</p>
+          <p>Dexterity: {character.dexterity}</p>
+          <p>Constitution: {character.constitution}</p>
+          <p>Intelligence: {character.intelligence}</p>
+          <p>Wisdom: {character.wisdom}</p>
+          <p>Charisma: {character.charisma}</p>
+        </div>
       </div>
       <div>
         <form id='update-abilities-form' onSubmit={handleUpdateCharacter}>
           <label>Strength</label>
-          <input id='str' type='number' value={sheet.strength} onChange={e => setStrength(e.target.value)}></input>
+          <input id='str' type='number' value={strength} onChange={e => setStrength(e.target.value)}></input>
           <label>Dexterity</label>
           <input id='dex' type='number' value={dexterity} onChange={e => setDexterity(e.target.value)}></input>
           <label>Constitution</label>
