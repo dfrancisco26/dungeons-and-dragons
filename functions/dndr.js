@@ -11,7 +11,7 @@ exports.handler = async () => {
   
   try {
   
-    const response = await fetch (`https://api.open5e.com/classes`, 
+    const response = await fetch (`https://api.open5e.com/races`, 
     );
     const data = await response.json();
     const json = JSON.stringify({ data });

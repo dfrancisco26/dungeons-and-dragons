@@ -1,23 +1,62 @@
-import logo from './logo.svg';
 import './App.css';
+import Auth from './AuthPage';
+import { useState } from 'react';
+import CreateCharacter from './CreateCharacter';
+import Profile from './Profile';
+import { client } from './services/client';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from 'react-router-dom';
+import { logout } from './services/fetch-utils';
 
 function App() {
+  const [user, setUser] = useState(client.auth.user());
+
+  async function handleLogoutClick() {
+    await logout();
+    setUser('');
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <div className='navigation'>
+          <nav>
+            <ul>
+              <li>
+                <Link to ="/Profile">Profile</Link>
+              </li>
+              <li>
+                <Link to = "/CreateCharacter">Create a new character</Link>
+              </li>
+              {user && 
+          <button onClick={handleLogoutClick}>Logout</button>}
+            </ul>
+          </nav>
+        </div>
+        <img className='die' src='https://clipart.world/wp-content/uploads/2021/05/D20-clipart-transparent-png-4.png' alt='die'></img>
+        <Switch>
+          <Route exact path="/">
+            {
+              !user ? <Auth setUser={setUser} /> : <Redirect to="/" />
+            }
+          </Route>
+          <Route exact path="/CreateCharacter">
+            {
+              user ? <CreateCharacter /> : <Redirect to="/" />
+            }
+          </Route>
+          <Route exact path="/Profile">
+            {
+              user ? <Profile /> : <Redirect to="/" />
+            }
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

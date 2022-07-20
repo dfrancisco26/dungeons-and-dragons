@@ -1,34 +1,57 @@
 .App {
-  text-align: center;
+  /* CSS HEX */
+--pale-silver: #d8cbc7ff;
+--golden-brown: #9a6d38ff;
+--pine-tree: #1f271bff;
+--slate-gray: #627c85ff;
+--persian-plum: #70161eff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.auth {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: url(../src/hscroll.png);
+  background-repeat: no-repeat;
 }
 
-.App-link {
-  color: #61dafb;
+.login-form {
+  background-color: antiquewhite;
+  margin: 30px;
+  padding: 10px;
+  max-width: fit-content;
+  border-radius: 5px;
 }
 
-@keyframes App-logo-spin {
+.signup-form {
+  background-color: slategray;
+  margin: 30px;
+  padding: 10px;
+  max-width: fit-content;
+  border-radius: 5px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  max-width: fit-content;
+  border: 4px solid black;
+  margin: 50px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.die {
+  height: 100px;
+  animation: infinite-spinning 3s;
+  animation-iteration-count: infinite;
+  flex-direction: row-reverse;
+}
+
+@keyframes infinite-spinning {
   from {
     transform: rotate(0deg);
   }
