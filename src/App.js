@@ -52,9 +52,7 @@ function App() {
             }
           </Route>
           <Route exact path="/detail/:id">  
-
             <Detail/>
-
           </Route>
         </Switch>
       </Router>

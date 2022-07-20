@@ -65,6 +65,25 @@ export async function getSingleCard(id) {
   return checkError(response);
 }
 
+export async function deleteCharacter(id) {
+  const { data } = await client
+    .from('sheets')
+    .delete()
+    .match({ id })
+    .single();
+
+  return data;
+}
+
+export async function updateCharacter(sheet, id) {
+  const { data } = await client
+    .from('sheets')
+    .update(sheet)
+    .match({ id })
+    .single();
+
+  return data;
+}
 
 
 

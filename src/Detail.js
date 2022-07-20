@@ -1,16 +1,21 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSingleCard } from './services/fetch-utils';
-
+import { deleteCharacter, getSingleCard } from './services/fetch-utils';
+import { useHistory } from 'react-router-dom';
 
 
 
 export default function Detail() {
   const [character, setCharacters] = useState({});
   const params = useParams();
+  const { push } = useHistory();
 
+  async function handleDeleteCharacter() {
+    await deleteCharacter(params.id);
 
+    push('/profile');
+  }
 
   useEffect(() => {
     async function onLoad() {
@@ -32,6 +37,7 @@ export default function Detail() {
         <p>Wisdom: {character.wisdom}</p>
         <p>Charisma: {character.charisma}</p>
       </div>
+      <button onClick={handleDeleteCharacter} className='delete-button'>Delete Character</button>
     </div>);
     
   
