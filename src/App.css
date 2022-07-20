@@ -103,3 +103,17 @@ body {
  #submit-button {
   margin-left: 10%;
  }
+
+ #delete-button {
+  background-color: red;
+ }
+
+ #abilities{
+  background-color: var(--slate-gray);
+  color: white;
+ }
+
+ #update-abilities-form {
+  background-color: var(--slate-gray);
+  color: white;
+ }

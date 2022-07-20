@@ -21,7 +21,9 @@ export async function signIn(email, password) {
 }
 
 export async function logout() {
+
   await client.auth.signOut();
+
 }
 
 
@@ -75,13 +77,13 @@ export async function deleteCharacter(id) {
   return data;
 }
 
-export async function updateCharacter(sheet, id) {
+export async function updateCharacter(id, sheet) {
+
   const { data } = await client
     .from('sheets')
     .update(sheet)
     .match({ id })
     .single();
-
   return data;
 }
 

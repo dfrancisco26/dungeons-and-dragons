@@ -11,7 +11,7 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 
 
@@ -21,6 +21,7 @@ function App() {
   async function handleLogoutClick() {
     await logout();
     setUser('');
+
   }
 
   return (
@@ -52,7 +53,9 @@ function App() {
             }
           </Route>
           <Route exact path="/detail/:id">  
-            <Detail/>
+            {
+              user ? <Detail/> : <Redirect to="/" />
+            }
           </Route>
         </Switch>
       </Router>

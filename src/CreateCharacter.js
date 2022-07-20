@@ -83,7 +83,7 @@ export default function CreateCharacter() {
         <br></br>
         <label>Class:  
           <select id='class-select' required onChange={e => setClassInput(e.target.value)}>
-            <option value={''}></option> 
+            <option value={null}></option> 
             {
               dClass.map((Dclass) => <option value={Dclass.data} className='class-selection' key = {Dclass.slug} > 
                 {
@@ -95,7 +95,7 @@ export default function CreateCharacter() {
         <br></br>
         <label>Race:   
           <select id='race-select' onChange={e => setRaceInput(e.target.value)}>
-            <option value={''}></option>
+            <option value={null}></option>
             {
               dRace.map((Drace) => <option value={Drace.data} className='race-selection' key = {Drace.slug} >
                 {
