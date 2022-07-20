@@ -16,11 +16,6 @@ body {
 }
 
 
-.auth {
-  display: flex;
-  flex-direction: column;
-
-}
 
 .login-form {
   background-color: antiquewhite;
@@ -67,3 +62,15 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.navigation {
+  background-color: var(--slate-gray);
+  border-radius: 5px;
+  margin: 20px;
+  padding: 6px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 60%;
+  align-items: center;
+}
+

@@ -26,16 +26,10 @@ function App() {
       <Router>
         <div className='navigation'>
           <nav>
-            <ul>
-              <li>
-                <Link to ="/Profile">Profile</Link>
-              </li>
-              <li>
-                <Link to = "/CreateCharacter">Create a new character</Link>
-              </li>
-              {user && 
-          <button onClick={handleLogoutClick}>Logout</button>}
-            </ul>
+            <span id='profile-link'><Link to ="/Profile">Profile</Link></span>
+            <span id='charcreate-link'></span><Link to = "/CreateCharacter">Create a new character</Link>
+            {user && 
+          <button id='logout-button' onClick={handleLogoutClick}>Logout</button>}
           </nav>
         </div>
         <img className='die' src='https://clipart.world/wp-content/uploads/2021/05/D20-clipart-transparent-png-4.png' alt='die'></img>
