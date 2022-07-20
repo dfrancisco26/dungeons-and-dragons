@@ -81,3 +81,25 @@ body {
   align-items: center;
 }
 
+.createchar-form {
+  background-color: rgba(112, 128, 144, .9);
+  max-width: 25%;
+  padding: 10px;
+  margin: 12px;
+}
+
+#name-input {
+  margin-left: 4px;
+}
+
+#class-select {
+  margin-left: 4px;
+
+}
+ #race-select {
+  margin-left: 4px;
+ }
+
+ #submit-button {
+  margin-left: 10%;
+ }

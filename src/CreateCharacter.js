@@ -67,10 +67,11 @@ export default function CreateCharacter() {
 
   return (
     <><div>
-      <form onSubmit={handleSubmit}>
-        <label>Name<input value={name} onChange = {e => setName(e.target.value)}></input></label>
-        <label>Class
-          <select required onChange={e => setClassInput(e.target.value)}>
+      <form className='createchar-form' onSubmit={handleSubmit}>
+        <label>Name:  <input id='name-input' value={name} onChange = {e => setName(e.target.value)}></input></label>
+        <br></br>
+        <label>Class:  
+          <select id='class-select' required onChange={e => setClassInput(e.target.value)}>
             <option value={''}></option> 
             {
               dClass.map((Dclass) => <option value={Dclass.data} className='class-selection' key = {Dclass.slug} > 
@@ -80,8 +81,9 @@ export default function CreateCharacter() {
               </option>)
             }
           </select></label>
-        <label>Race 
-          <select onChange={e => setRaceInput(e.target.value)}>
+        <br></br>
+        <label>Race:   
+          <select id='race-select' onChange={e => setRaceInput(e.target.value)}>
             <option value={''}></option>
             {
               dRace.map((Drace) => <option value={Drace.data} className='race-selection' key = {Drace.slug} >
@@ -92,7 +94,8 @@ export default function CreateCharacter() {
             }
           </select>
         </label>
-        <button>Submit Selection</button>
+        <br></br>
+        <button id='submit-button'>Submit Selection</button>
       </form>
     </div>
     <div>
