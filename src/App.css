@@ -159,3 +159,12 @@ body {
   margin: 12px;
   padding: 12px;
 }
+
+#ab-div {
+  padding: 8px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: slategray;
+  color: whitesmoke;
+}

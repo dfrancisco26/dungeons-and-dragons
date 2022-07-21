@@ -18,6 +18,7 @@ export default function Detail() {
   const [intelligence, setIntelligence] = useState(1);
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
+  const [campaign, setCampaign] = useState(1);
   const [open, setOpen] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -35,7 +36,8 @@ export default function Detail() {
     constitution: constitution,
     intelligence: intelligence,
     wisdom: wisdom,
-    charisma: charisma
+    charisma: charisma,
+    campaign: campaign
   };
 
   useEffect(() => {
@@ -48,6 +50,7 @@ export default function Detail() {
       setIntelligence(data.intelligence);
       setWisdom(data.wisdom);
       setCharisma(data.charisma);
+      setCampaign(data.campaign);
       
     }
     onLoad();
@@ -80,11 +83,12 @@ export default function Detail() {
           <p>Intelligence: {character.intelligence}</p>
           <p>Wisdom: {character.wisdom}</p>
           <p>Charisma: {character.charisma}</p>
+          <p>Campaign: {character.campaign}</p>
         </div>
       </div>
       <Collapsible trigger="Update Character" className='collapsible'>
-        <div>
-          <form id='update-abilities-form' onSubmit={handleUpdateCharacter}>
+        <div id='ab-div'>
+          <form onSubmit={handleUpdateCharacter}>
             <label>Strength</label>
             <input id='str' type='number' value={strength} onChange={e => setStrength(e.target.value)}></input>
             <label>Dexterity</label>
@@ -97,6 +101,8 @@ export default function Detail() {
             <input id='wis' type='number' value={wisdom} onChange={e => setWisdom(e.target.value)}></input>
             <label>Charisma</label>
             <input id='cha' type='number' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
+            <label>Campaign</label>
+            <input id='cam' value={campaign} onChange={e => setCampaign (e.target.value)}></input>
             <br></br>
             <button id='update-button'>Update Character</button>
           </form>

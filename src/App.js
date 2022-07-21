@@ -5,6 +5,7 @@ import CreateCharacter from './CreateCharacter';
 import Profile from './Profile';
 import { client } from './services/client';
 import Detail from './Detail';
+import CreateCampaign from './CreateCampaign';
 import { logout } from './services/fetch-utils';
 import {
   BrowserRouter as Router,
@@ -29,8 +30,9 @@ function App() {
       <Router>
         <div className='navigation'>
           <nav>
-            <span id='profile-link'><Link to ="/Profile">Profile</Link></span>
-            <span id='charcreate-link'></span><Link to = "/CreateCharacter">Create a new character</Link>
+            <span id='profile-link'><Link to ="/profile">Profile</Link></span>
+            <span id='charcreate-link'></span><Link to = "/createcharacter">Create a new character</Link>
+            <Link to="/createcampaign">Create a new campaign</Link>
             {user && 
           <button id='logout-button' onClick={handleLogoutClick}>Logout</button>}
           </nav>
@@ -39,15 +41,15 @@ function App() {
         <Switch>
           <Route exact path="/">
             {
-              !user ? <Auth setUser={setUser} /> : <Redirect to="/" />
+              !user ? <Auth setUser={setUser} /> : <Redirect to="/profile" />
             }
           </Route>
-          <Route exact path="/CreateCharacter">
+          <Route exact path="/createcharacter">
             {
               user ? <CreateCharacter /> : <Redirect to="/" />
             }
           </Route>
-          <Route exact path="/Profile">
+          <Route exact path="/profile">
             {
               user ? <Profile /> : <Redirect to="/" />
             }
@@ -55,6 +57,11 @@ function App() {
           <Route exact path="/detail/:id">  
             {
               user ? <Detail/> : <Redirect to="/" />
+            }
+          </Route>
+          <Route exact path="/createcampaign">
+            {
+              user ? <CreateCampaign /> : <Redirect to="/" />
             }
           </Route>
         </Switch>
