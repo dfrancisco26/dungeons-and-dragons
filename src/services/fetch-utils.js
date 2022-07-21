@@ -21,7 +21,9 @@ export async function signIn(email, password) {
 }
 
 export async function logout() {
+
   await client.auth.signOut();
+
 }
 
 
@@ -56,6 +58,34 @@ export async function getCharacter() {
   return checkError(response);
 }
 
+export async function getSingleCard(id) {
+  const response = await client
+    .from('sheets')
+    .select('*')
+    .match({ id })
+    .single();
+  return checkError(response);
+}
+
+export async function deleteCharacter(id) {
+  const { data } = await client
+    .from('sheets')
+    .delete()
+    .match({ id })
+    .single();
+
+  return data;
+}
+
+export async function updateCharacter(id, sheet) {
+
+  const { data } = await client
+    .from('sheets')
+    .update(sheet)
+    .match({ id })
+    .single();
+  return data;
+}
 
 
 

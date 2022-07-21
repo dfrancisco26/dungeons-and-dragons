@@ -4,14 +4,16 @@ import { useState } from 'react';
 import CreateCharacter from './CreateCharacter';
 import Profile from './Profile';
 import { client } from './services/client';
+import Detail from './Detail';
+import { logout } from './services/fetch-utils';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
-import { logout } from './services/fetch-utils';
+
 
 function App() {
   const [user, setUser] = useState(client.auth.user());
@@ -19,6 +21,7 @@ function App() {
   async function handleLogoutClick() {
     await logout();
     setUser('');
+
   }
 
   return (
@@ -47,6 +50,11 @@ function App() {
           <Route exact path="/Profile">
             {
               user ? <Profile /> : <Redirect to="/" />
+            }
+          </Route>
+          <Route exact path="/detail/:id">  
+            {
+              user ? <Detail/> : <Redirect to="/" />
             }
           </Route>
         </Switch>

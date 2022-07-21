@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 require('dotenv').config();
 
+
 const headers = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type',
@@ -10,7 +11,7 @@ const headers = {
 exports.handler = async () => {
   
   try {
-  
+
     const response = await fetch (`https://api.open5e.com/classes`, 
     );
     const data = await response.json();
