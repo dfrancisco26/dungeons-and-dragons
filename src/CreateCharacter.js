@@ -3,6 +3,9 @@ import { checkError } from './services/client';
 import { getClass } from './services/fetch-utils';
 import { getRace } from './services/fetch-utils';
 import { createCharacter } from './services/fetch-utils';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 export default function CreateCharacter() {
   const [dClass, setDclass] = useState([]);
@@ -18,7 +21,16 @@ export default function CreateCharacter() {
   const [intelligence, setIntelligence] = useState(1);
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
+  const [open, setOpen] = useState(false);
 
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   // const race = dRace.find(singlerace => singlerace.name === raceInput); (just in case we can no longer hit the API for single races/classes)
 
@@ -66,6 +78,7 @@ export default function CreateCharacter() {
     const rdata = await getRace(raceInput);
     setDrace(rdata.results);
     setDclass(data.results); //this could be an issue
+    setOpen(true);
     setClassInput('');
     setRaceInput('');
     setName('');
@@ -118,7 +131,14 @@ export default function CreateCharacter() {
         <label>Charisma</label>
         <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
         <br></br>
-        <button id='submit-button'>Submit Selection</button>
+        <Button variant="outlined" onClick={handleSubmit}>
+        Submit
+        </Button>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          You successfully created a character!
+          </Alert>
+        </Snackbar>
       </form>
     </div>
 
