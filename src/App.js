@@ -7,6 +7,7 @@ import { client } from './services/client';
 import Detail from './Detail';
 import CreateCampaign from './CreateCampaign';
 import { logout } from './services/fetch-utils';
+import logo from './assets/die.png';
 import {
   BrowserRouter as Router,
   Switch,
@@ -37,7 +38,7 @@ function App() {
           <button id='logout-button' onClick={handleLogoutClick}>Logout</button>}
           </nav>
         </div>
-        <img className='die' src='./assets/die.png' alt='die'></img>
+        <img className='die' src={logo} alt='die'></img>
         <Switch>
           <Route exact path="/">
             {

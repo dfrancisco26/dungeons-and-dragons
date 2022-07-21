@@ -6,7 +6,7 @@ body {
 
 
 .App {
-  /* CSS HEX */
+
 --pale-silver: #d8cbc7ff;
 --golden-brown: #9a6d38ff;
 --pine-tree: #1f271bff;
@@ -77,9 +77,19 @@ body {
   margin: 20px;
   padding: 6px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   max-width: 60%;
-  align-items: center;
+  align-items: baseline;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+
+}
+.navigation span {
+  margin-left: 10px;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
 }
 
 .createchar-form {
