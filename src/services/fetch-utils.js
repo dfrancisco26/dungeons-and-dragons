@@ -94,11 +94,11 @@ export async function getCamp() {
   return checkError(response);
 }
 
-export async function getPlayers(id) {
+export async function getPlayers(id, campaign) {
   const response = await client
     .from('campaign')
     .select('*')
-    .match({ id })
+    .match({ id, campaign })
     .single();
   return checkError(response);
 }
