@@ -37,7 +37,7 @@ function App() {
           <button id='logout-button' onClick={handleLogoutClick}>Logout</button>}
           </nav>
         </div>
-        <img className='die' src='https://clipart.world/wp-content/uploads/2021/05/D20-clipart-transparent-png-4.png' alt='die'></img>
+        <img className='die' src='./assets/die.png' alt='die'></img>
         <Switch>
           <Route exact path="/">
             {

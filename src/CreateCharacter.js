@@ -140,7 +140,8 @@ export default function CreateCharacter() {
         <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
         <label>Campaign
           <select id='campaign' onChange={e => setCampaign(e.target.value)}>
-            <option value='1'>Azerims Fall</option>
+            {/* Map out campaigns with value ID and display template literal of campaign name */}
+            <option value={campaign.id}>{campaign.name}</option>
             <option value='2'>Heavensward</option>
             <option value='3'>Raid Capital Ship</option>
           </select>

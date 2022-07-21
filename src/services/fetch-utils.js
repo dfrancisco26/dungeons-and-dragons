@@ -36,6 +36,14 @@ export async function getClass() {
   return data;
 }
 
+export async function getCampaigns() {
+  const response = await client
+    .from('campaign')
+    .select('*');
+
+  return checkError(response); 
+}
+
 export async function getRace() {
   const rawData = await fetch(`/.netlify/functions/dndr?races`);
 
