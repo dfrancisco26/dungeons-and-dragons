@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { checkError } from './services/client';
 import { getClass } from './services/fetch-utils';
 import { getRace } from './services/fetch-utils';
-import { createCharacter } from './services/fetch-utils';
+import { createCharacter, getCamp } from './services/fetch-utils';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+
 
 export default function CreateCharacter() {
   const [dClass, setDclass] = useState([]);
@@ -22,7 +23,8 @@ export default function CreateCharacter() {
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
   const [open, setOpen] = useState(false);
-  const [campaign, setCampaign] = useState('');
+  const [campaign, setCampaign] = useState([]);
+  const [campQuery, setCampQuery] = useState('');
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -49,7 +51,10 @@ export default function CreateCharacter() {
     campaign: campaign
   };
 
-
+  async function storeCamp() {
+    const data = await getCamp(campQuery);
+    setCampaign(data);
+  }
   async function storeRaces() {
     const data = await getRace(raceQuery);
 
@@ -66,6 +71,7 @@ export default function CreateCharacter() {
   useEffect(() => {
     storeClasses();
     storeRaces();
+    storeCamp();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // might need separate useEffect for races
 
@@ -90,6 +96,8 @@ export default function CreateCharacter() {
     setWisdom(1);
     setCharisma(1);
     setCampaign(1);
+    setCampQuery(setCampaign);
+
     
 
     const response = await createCharacter(sheet);
@@ -139,10 +147,15 @@ export default function CreateCharacter() {
         <label>Charisma</label>
         <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
         <label>Campaign
-          <select id='campaign' onChange={e => setCampaign(e.target.value)}>
-            <option value='1'>Azerims Fall</option>
-            <option value='2'>Heavensward</option>
-            <option value='3'>Raid Capital Ship</option>
+          <select id='camp-select' required onChange={e => setCampaign(e.target.value)}>
+            <option value={null}></option> 
+            {
+              campaign.map((Camp) => <option value={Camp.data} className='camp-selection' key = {Camp.id + Camp.campaign} > 
+                {
+                  Camp.campaign
+                }
+              </option>)
+            }
           </select>
         </label>
         <br></br>
