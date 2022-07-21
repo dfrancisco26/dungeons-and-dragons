@@ -54,7 +54,6 @@ export default function Detail() {
         <div id='char-info'>
           <h1 id='char-name'>{character.name}</h1>
           <h2 id='char-rc'>{character.race} {character.class}</h2>
-          <img src={`./assets/${character.race}.png`}></img>
         </div>
         <div id='abilities'>
           <p>Strength: {character.strength}</p>
