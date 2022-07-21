@@ -27,7 +27,7 @@ function App() {
         <div className='navigation'>
           <nav>
             <span id='profile-link'><Link to ="/Profile">Profile</Link></span>
-            <span id='charcreate-link'></span><Link to = "/CreateCharacter">Create a new character</Link>
+            <span id='charCreate-link'></span><Link to = "/CreateCharacter">Create a new character</Link>
             {user && 
           <button id='logout-button' onClick={handleLogoutClick}>Logout</button>}
           </nav>
