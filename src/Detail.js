@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import Collapsible from 'react-collapsible';
 
 export default function Detail() {
   const [character, setCharacters] = useState({});
@@ -41,7 +42,13 @@ export default function Detail() {
     async function onLoad() {
       const data = await getSingleCard(params.id);
       setCharacters(data);
-  
+      setStrength(data.strength);
+      setDexterity(data.dexterity);
+      setConstitution(data.constitution);
+      setIntelligence(data.intelligence);
+      setWisdom(data.wisdom);
+      setCharisma(data.charisma);
+      
     }
     onLoad();
   }, [params.id]);
@@ -75,24 +82,27 @@ export default function Detail() {
           <p>Charisma: {character.charisma}</p>
         </div>
       </div>
-      <div>
-        <form id='update-abilities-form' onSubmit={handleUpdateCharacter}>
-          <label>Strength</label>
-          <input id='str' type='number' value={strength} onChange={e => setStrength(e.target.value)}></input>
-          <label>Dexterity</label>
-          <input id='dex' type='number' value={dexterity} onChange={e => setDexterity(e.target.value)}></input>
-          <label>Constitution</label>
-          <input id='con' type='number' value={constitution} onChange={e => setConstitution(e.target.value)}></input>
-          <label>Intelligence</label>
-          <input id='int' type='number' value={intelligence} onChange={e => setIntelligence(e.target.value)}></input>
-          <label>Wisdom</label>
-          <input id='wis' type='number' value={wisdom} onChange={e => setWisdom(e.target.value)}></input>
-          <label>Charisma</label>
-          <input id='cha' type='number' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
-          <br></br>
-          <button id='update-button'>Update Character</button>
-        </form>
-      </div>
+      <Collapsible trigger="Update Character" className='collapsible'>
+        <div>
+          <form id='update-abilities-form' onSubmit={handleUpdateCharacter}>
+            <label>Strength</label>
+            <input id='str' type='number' value={strength} onChange={e => setStrength(e.target.value)}></input>
+            <label>Dexterity</label>
+            <input id='dex' type='number' value={dexterity} onChange={e => setDexterity(e.target.value)}></input>
+            <label>Constitution</label>
+            <input id='con' type='number' value={constitution} onChange={e => setConstitution(e.target.value)}></input>
+            <label>Intelligence</label>
+            <input id='int' type='number' value={intelligence} onChange={e => setIntelligence(e.target.value)}></input>
+            <label>Wisdom</label>
+            <input id='wis' type='number' value={wisdom} onChange={e => setWisdom(e.target.value)}></input>
+            <label>Charisma</label>
+            <input id='cha' type='number' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
+            <br></br>
+            <button id='update-button'>Update Character</button>
+          </form>
+        </div>
+
+      </Collapsible >
 
       <Button variant="contained" sx={{ backgroundColor: 'orangered', color: 'antiquewhite' }} onClick={handleDeleteCharacter}>
         Delete Character

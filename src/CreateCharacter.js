@@ -22,7 +22,7 @@ export default function CreateCharacter() {
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
   const [open, setOpen] = useState(false);
-
+  const [campaign, setCampaign] = useState('');
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -45,7 +45,8 @@ export default function CreateCharacter() {
     constitution: constitution,
     intelligence: intelligence,
     wisdom: wisdom,
-    charisma: charisma
+    charisma: charisma,
+    campaign: campaign
   };
 
 
@@ -88,6 +89,7 @@ export default function CreateCharacter() {
     setConstitution(1);
     setWisdom(1);
     setCharisma(1);
+    setCampaign(1);
     
 
     const response = await createCharacter(sheet);
@@ -136,7 +138,15 @@ export default function CreateCharacter() {
         <input id='wis' value={wisdom} onChange={e => setWisdom (e.target.value)}></input>
         <label>Charisma</label>
         <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
+        <label>Campaign
+          <select id='campaign' onChange={e => setCampaign(e.target.value)}>
+            <option value='1'>Azerims Fall</option>
+            <option value='2'>Heavensward</option>
+            <option value='3'>Raid Capital Ship</option>
+          </select>
+        </label>
         <br></br>
+        
         <Button variant="contained" sx={{ backgroundColor: 'DarkSlateGray', color: 'antiquewhite' }} onClick={handleSubmit}>
         Submit
         </Button>
