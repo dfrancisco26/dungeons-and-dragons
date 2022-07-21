@@ -82,6 +82,12 @@ export default function CreateCharacter() {
     setClassInput('');
     setRaceInput('');
     setName('');
+    setStrength(1);
+    setDexterity(1);
+    setIntelligence(1);
+    setConstitution(1);
+    setWisdom(1);
+    setCharisma(1);
     
 
     const response = await createCharacter(sheet);
@@ -131,7 +137,7 @@ export default function CreateCharacter() {
         <label>Charisma</label>
         <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
         <br></br>
-        <Button variant="outlined" onClick={handleSubmit}>
+        <Button variant="contained" sx={{ backgroundColor: 'DarkSlateGray', color: 'antiquewhite' }} onClick={handleSubmit}>
         Submit
         </Button>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
