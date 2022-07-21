@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { deleteCharacter, getSingleCard, updateCharacter } from './services/fetch-utils';
 import { useHistory } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 export default function Detail() {
   const [character, setCharacters] = useState({});
@@ -14,7 +17,15 @@ export default function Detail() {
   const [intelligence, setIntelligence] = useState(1);
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
-  
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
   
   const sheet = {
     
@@ -38,14 +49,14 @@ export default function Detail() {
   async function handleUpdateCharacter(e) {
     e.preventDefault();
     await updateCharacter(params.id, sheet);
-    
     push('/profile');
+
   }
   
   async function handleDeleteCharacter() {
     await deleteCharacter(params.id);
-
     push('/profile');
+    setOpen(true);
   }
 
   return (
@@ -82,7 +93,10 @@ export default function Detail() {
           <button id='update-button'>Update Character</button>
         </form>
       </div>
-      <button id='delete-button' onClick={handleDeleteCharacter} className='delete-button'>Delete Character</button>
+
+      <Button variant="contained" sx={{ backgroundColor: 'orangered', color: 'antiquewhite' }} onClick={handleDeleteCharacter}>
+        Delete Character
+      </Button>
     </div>);
     
   

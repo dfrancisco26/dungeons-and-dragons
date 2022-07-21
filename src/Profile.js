@@ -23,13 +23,13 @@ export default function Profile() {
 
   
   return (
-    <>
+    <div className='scroller'>
       
       {characters.map((character) => <Link className='card' key={`${character.id}`} to={`/detail/${character.id}`}> <div>
         <h1>{character.name}</h1>
         <h2>{character.race} {character.class}</h2>
       </div>
       </Link>)}
-    </>
+    </div>
   );
 }
