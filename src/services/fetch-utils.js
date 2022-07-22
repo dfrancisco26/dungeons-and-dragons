@@ -87,6 +87,22 @@ export async function updateCharacter(id, sheet) {
   return data;
 }
 
+export async function getCamp() {
+  const response = await client
+    .from('campaign')
+    .select('*');
+  return checkError(response);
+}
+
+export async function getPlayers(id, campaign) {
+  const response = await client
+    .from('campaign')
+    .select('*')
+    .match({ id, campaign })
+    .single();
+  return checkError(response);
+}
+
 
 
     
