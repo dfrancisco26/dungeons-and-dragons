@@ -29,12 +29,11 @@ function App() {
     <div className="App">
       <Router>
         <div className='navigation'>
-          <nav>
-            <span id='profile-link'><Link to ="/profile">Profile</Link></span>
-            <span id='charcreate-link'></span><Link to = "/createcharacter">Create a new character</Link>
-            {user && 
+          <span id='profile-link'><Link to ="/profile">Profile</Link></span>
+          <span id='charcreate-link'></span><Link to = "/createcharacter">Create a new character</Link>
+          
+          {user && 
           <button id='logout-button' onClick={handleLogoutClick}>Logout</button>}
-          </nav>
         </div>
         <img className='die' src={logo} alt='die'></img>
         <Switch>
