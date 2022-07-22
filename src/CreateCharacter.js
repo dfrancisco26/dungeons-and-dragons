@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-
+import DieRoll from './DieRoll';
 
 export default function CreateCharacter() {
   const [dClass, setDclass] = useState([]);
@@ -110,6 +110,7 @@ export default function CreateCharacter() {
 
   return (
     <div>
+      <DieRoll />
       <form className='createchar-form' onSubmit={handleSubmit}>
         <label>Name:  <input id='name-input' value={name} onChange = {e => setName(e.target.value)}></input></label>
         <br></br>

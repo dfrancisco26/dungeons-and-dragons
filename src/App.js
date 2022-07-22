@@ -59,7 +59,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <footer id='footer'>Created by: Daniel, Sean, and David</footer>
     </div>
   );
 }

@@ -17,7 +17,16 @@ export default function Detail() {
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
   const [campaign, setCampaign] = useState(1);
+  const [open, setOpen] = useState(false);
   
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const sheet = {
     
     strength: strength,
@@ -77,7 +86,7 @@ export default function Detail() {
       </div>
       <Collapsible trigger="Update Character" className='collapsible'>
         <div id='ab-div'>
-          <form onSubmit={handleUpdateCharacter}>
+          <form id='update-form' onSubmit={handleUpdateCharacter}>
             <label>Strength</label>
             <input id='str' type='number' value={strength} onChange={e => setStrength(e.target.value)}></input>
             <label>Dexterity</label>
@@ -96,10 +105,8 @@ export default function Detail() {
             <button id='update-button'>Update Character</button>
           </form>
         </div>
-
-      </Collapsible >
-
-      <Button variant="contained" sx={{ backgroundColor: 'orangeRed', color: 'antiqueWhite' }} onClick={handleDeleteCharacter}>
+      </Collapsible>
+      <Button id='delete-button' variant="contained" sx={{ backgroundColor: 'orangeRed', color: 'antiqueWhite' }} onClick={handleDeleteCharacter}>
         Delete Character
       </Button>
     </div>);
