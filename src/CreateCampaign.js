@@ -14,7 +14,7 @@ export default function CreateCampaign() {
     <><div className='campHeader'>CreateCampaign</div><div>
 
       <div>
-        <p>{data.campaign}</p>
+        
       </div>
     </div></>
   );

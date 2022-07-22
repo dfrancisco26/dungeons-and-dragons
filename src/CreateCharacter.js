@@ -25,7 +25,8 @@ export default function CreateCharacter() {
   const [open, setOpen] = useState(false);
   const [campaign, setCampaign] = useState([]);
   const [campQuery, setCampQuery] = useState('');
-
+  const [currentCampaign, setCurrentCampaign] = useState(1);
+  console.log(campaign);
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -48,7 +49,8 @@ export default function CreateCharacter() {
     intelligence: intelligence,
     wisdom: wisdom,
     charisma: charisma,
-    campaign: campaign
+    campaign: currentCampaign
+  
   };
 
   async function storeCamp() {
@@ -95,8 +97,8 @@ export default function CreateCharacter() {
     setConstitution(1);
     setWisdom(1);
     setCharisma(1);
-    setCampaign(1);
-    setCampQuery(setCampaign);
+    setCurrentCampaign(1);
+    setCampQuery();
 
     
 
@@ -147,10 +149,10 @@ export default function CreateCharacter() {
         <label>Charisma</label>
         <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
         <label>Campaign
-          <select id='camp-select' required onChange={e => setCampaign(e.target.value)}>
+          <select id='camp-select' onChange={e => setCurrentCampaign(e.target.value)}>
             <option value={null}></option> 
             {
-              campaign.map((Camp) => <option value={Camp.data} className='camp-selection' key = {Camp.id + Camp.campaign} > 
+              campaign.map((Camp) => <option value={Camp.id} className='camp-selection' key={Camp.id + Camp.campaign} > 
                 {
                   Camp.campaign
                 }
