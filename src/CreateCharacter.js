@@ -3,6 +3,7 @@ import { checkError } from './services/client';
 import { getClass } from './services/fetch-utils';
 import { getRace } from './services/fetch-utils';
 import { createCharacter, getCamp } from './services/fetch-utils';
+import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -26,6 +27,8 @@ export default function CreateCharacter() {
   const [campaign, setCampaign] = useState([]);
   const [campQuery, setCampQuery] = useState('');
   const [currentCampaign, setCurrentCampaign] = useState(1);
+  const { push } = useHistory();
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -100,6 +103,7 @@ export default function CreateCharacter() {
     
 
     const response = await createCharacter(sheet);
+    push('/profile');
     return checkError(response);
   }
 
