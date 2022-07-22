@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { getCharacter } from './services/fetch-utils';
 import { useState } from 'react';
-
 import { Link } from 'react-router-dom';
-import { Button, Alert, Snackbar } from '@mui/material';
-import CustomizedSnackbars from './services/utils';
 
 export default function Profile() {
   const [characters, setCharacters] = useState([]);
