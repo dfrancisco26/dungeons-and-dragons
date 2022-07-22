@@ -26,7 +26,6 @@ export default function CreateCharacter() {
   const [campaign, setCampaign] = useState([]);
   const [campQuery, setCampQuery] = useState('');
   const [currentCampaign, setCurrentCampaign] = useState(1);
-  console.log(campaign);
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -35,7 +34,6 @@ export default function CreateCharacter() {
     setOpen(false);
   };
 
-  // const race = dRace.find(singlerace => singlerace.name === raceInput); (just in case we can no longer hit the API for single races/classes)
 
 
 
@@ -75,8 +73,7 @@ export default function CreateCharacter() {
     storeRaces();
     storeCamp();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // might need separate useEffect for races
-
+  }, []);
   async function handleSubmit(e) {
 
     e.preventDefault();
@@ -86,7 +83,7 @@ export default function CreateCharacter() {
     const data = await getClass(classInput);
     const rdata = await getRace(raceInput);
     setDrace(rdata.results);
-    setDclass(data.results); //this could be an issue
+    setDclass(data.results);
     setOpen(true);
     setClassInput('');
     setRaceInput('');
