@@ -197,3 +197,11 @@ body {
   height: 15%;
   
 }
+
+.createchar-form {
+  display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    
+}
