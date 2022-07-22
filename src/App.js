@@ -29,8 +29,8 @@ function App() {
     <div className="App">
       <Router>
         <div className='navigation'>
-          <span id='profile-link'><Link to ="/profile">Profile</Link></span>
-          <span id='charcreate-link'></span><Link to = "/createcharacter">Create a new character</Link>
+          <Link id='profile-link' to ="/profile">Profile</Link>
+          <Link id='create-link' to = "/createcharacter">Create a new character</Link>
           
           {user && 
           <button id='logout-button' onClick={handleLogoutClick}>Logout</button>}
@@ -59,6 +59,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      <footer id='footer'>Created by: Daniel, Sean, and David</footer>
     </div>
   );
 }
