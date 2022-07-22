@@ -3,6 +3,10 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { deleteCharacter, getSingleCard, updateCharacter } from './services/fetch-utils';
 import { useHistory } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import Collapsible from 'react-collapsible';
 
 export default function Detail() {
   const [character, setCharacters] = useState({});
@@ -14,7 +18,16 @@ export default function Detail() {
   const [intelligence, setIntelligence] = useState(1);
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
-  
+  const [campaign, setCampaign] = useState(1);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
   
   const sheet = {
     
@@ -23,14 +36,22 @@ export default function Detail() {
     constitution: constitution,
     intelligence: intelligence,
     wisdom: wisdom,
-    charisma: charisma
+    charisma: charisma,
+    campaign: campaign
   };
 
   useEffect(() => {
     async function onLoad() {
       const data = await getSingleCard(params.id);
       setCharacters(data);
-  
+      setStrength(data.strength);
+      setDexterity(data.dexterity);
+      setConstitution(data.constitution);
+      setIntelligence(data.intelligence);
+      setWisdom(data.wisdom);
+      setCharisma(data.charisma);
+      setCampaign(data.campaign);
+      
     }
     onLoad();
   }, [params.id]);
@@ -38,14 +59,14 @@ export default function Detail() {
   async function handleUpdateCharacter(e) {
     e.preventDefault();
     await updateCharacter(params.id, sheet);
-    
     push('/profile');
+
   }
   
   async function handleDeleteCharacter() {
     await deleteCharacter(params.id);
-
     push('/profile');
+    setOpen(true);
   }
 
   return (
@@ -62,27 +83,36 @@ export default function Detail() {
           <p>Intelligence: {character.intelligence}</p>
           <p>Wisdom: {character.wisdom}</p>
           <p>Charisma: {character.charisma}</p>
+          <p>Campaign: {character.campaign}</p>
         </div>
       </div>
-      <div>
-        <form id='update-abilities-form' onSubmit={handleUpdateCharacter}>
-          <label>Strength</label>
-          <input id='str' type='number' value={strength} onChange={e => setStrength(e.target.value)}></input>
-          <label>Dexterity</label>
-          <input id='dex' type='number' value={dexterity} onChange={e => setDexterity(e.target.value)}></input>
-          <label>Constitution</label>
-          <input id='con' type='number' value={constitution} onChange={e => setConstitution(e.target.value)}></input>
-          <label>Intelligence</label>
-          <input id='int' type='number' value={intelligence} onChange={e => setIntelligence(e.target.value)}></input>
-          <label>Wisdom</label>
-          <input id='wis' type='number' value={wisdom} onChange={e => setWisdom(e.target.value)}></input>
-          <label>Charisma</label>
-          <input id='cha' type='number' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
-          <br></br>
-          <button id='update-button'>Update Character</button>
-        </form>
-      </div>
-      <button id='delete-button' onClick={handleDeleteCharacter} className='delete-button'>Delete Character</button>
+      <Collapsible trigger="Update Character" className='collapsible'>
+        <div id='ab-div'>
+          <form onSubmit={handleUpdateCharacter}>
+            <label>Strength</label>
+            <input id='str' type='number' value={strength} onChange={e => setStrength(e.target.value)}></input>
+            <label>Dexterity</label>
+            <input id='dex' type='number' value={dexterity} onChange={e => setDexterity(e.target.value)}></input>
+            <label>Constitution</label>
+            <input id='con' type='number' value={constitution} onChange={e => setConstitution(e.target.value)}></input>
+            <label>Intelligence</label>
+            <input id='int' type='number' value={intelligence} onChange={e => setIntelligence(e.target.value)}></input>
+            <label>Wisdom</label>
+            <input id='wis' type='number' value={wisdom} onChange={e => setWisdom(e.target.value)}></input>
+            <label>Charisma</label>
+            <input id='cha' type='number' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
+            <label>Campaign</label>
+            <input id='cam' value={campaign} onChange={e => setCampaign (e.target.value)}></input>
+            <br></br>
+            <button id='update-button'>Update Character</button>
+          </form>
+        </div>
+
+      </Collapsible >
+
+      <Button variant="contained" sx={{ backgroundColor: 'orangered', color: 'antiquewhite' }} onClick={handleDeleteCharacter}>
+        Delete Character
+      </Button>
     </div>);
     
   

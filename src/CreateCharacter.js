@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react';
 import { checkError } from './services/client';
 import { getClass } from './services/fetch-utils';
 import { getRace } from './services/fetch-utils';
-import { createCharacter } from './services/fetch-utils';
+import { createCharacter, getCamp } from './services/fetch-utils';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
 
 export default function CreateCharacter() {
   const [dClass, setDclass] = useState([]);
@@ -18,7 +22,17 @@ export default function CreateCharacter() {
   const [intelligence, setIntelligence] = useState(1);
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [campaign, setCampaign] = useState([]);
+  const [campQuery, setCampQuery] = useState('');
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   // const race = dRace.find(singlerace => singlerace.name === raceInput); (just in case we can no longer hit the API for single races/classes)
 
@@ -33,10 +47,14 @@ export default function CreateCharacter() {
     constitution: constitution,
     intelligence: intelligence,
     wisdom: wisdom,
-    charisma: charisma
+    charisma: charisma,
+    campaign: campaign
   };
 
-
+  async function storeCamp() {
+    const data = await getCamp(campQuery);
+    setCampaign(data);
+  }
   async function storeRaces() {
     const data = await getRace(raceQuery);
 
@@ -53,6 +71,7 @@ export default function CreateCharacter() {
   useEffect(() => {
     storeClasses();
     storeRaces();
+    storeCamp();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // might need separate useEffect for races
 
@@ -66,9 +85,19 @@ export default function CreateCharacter() {
     const rdata = await getRace(raceInput);
     setDrace(rdata.results);
     setDclass(data.results); //this could be an issue
+    setOpen(true);
     setClassInput('');
     setRaceInput('');
     setName('');
+    setStrength(1);
+    setDexterity(1);
+    setIntelligence(1);
+    setConstitution(1);
+    setWisdom(1);
+    setCharisma(1);
+    setCampaign(1);
+    setCampQuery(setCampaign);
+
     
 
     const response = await createCharacter(sheet);
@@ -117,8 +146,28 @@ export default function CreateCharacter() {
         <input id='wis' value={wisdom} onChange={e => setWisdom (e.target.value)}></input>
         <label>Charisma</label>
         <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
+        <label>Campaign
+          <select id='camp-select' required onChange={e => setCampaign(e.target.value)}>
+            <option value={null}></option> 
+            {
+              campaign.map((Camp) => <option value={Camp.data} className='camp-selection' key = {Camp.id + Camp.campaign} > 
+                {
+                  Camp.campaign
+                }
+              </option>)
+            }
+          </select>
+        </label>
         <br></br>
-        <button id='submit-button'>Submit Selection</button>
+        
+        <Button variant="contained" sx={{ backgroundColor: 'DarkSlateGray', color: 'antiquewhite' }} onClick={handleSubmit}>
+        Submit
+        </Button>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          You successfully created a character!
+          </Alert>
+        </Snackbar>
       </form>
     </div>
 
