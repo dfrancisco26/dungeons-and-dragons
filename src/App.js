@@ -32,7 +32,6 @@ function App() {
           <nav>
             <span id='profile-link'><Link to ="/profile">Profile</Link></span>
             <span id='charcreate-link'></span><Link to = "/createcharacter">Create a new character</Link>
-            <Link to="/createcampaign">Create a new campaign</Link>
             {user && 
           <button id='logout-button' onClick={handleLogoutClick}>Logout</button>}
           </nav>

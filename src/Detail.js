@@ -17,7 +17,6 @@ export default function Detail() {
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
   const [campaign, setCampaign] = useState(1);
-  const [open, setOpen] = useState(false);
   
   const sheet = {
     
@@ -56,7 +55,7 @@ export default function Detail() {
   async function handleDeleteCharacter() {
     await deleteCharacter(params.id);
     push('/profile');
-    setOpen(true);
+    
   }
 
   return (
@@ -100,7 +99,7 @@ export default function Detail() {
 
       </Collapsible >
 
-      <Button variant="contained" sx={{ backgroundColor: 'orangered', color: 'antiquewhite' }} onClick={handleDeleteCharacter}>
+      <Button variant="contained" sx={{ backgroundColor: 'orangeRed', color: 'antiqueWhite' }} onClick={handleDeleteCharacter}>
         Delete Character
       </Button>
     </div>);
