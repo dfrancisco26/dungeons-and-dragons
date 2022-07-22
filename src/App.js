@@ -5,7 +5,7 @@ import CreateCharacter from './CreateCharacter';
 import Profile from './Profile';
 import { client } from './services/client';
 import Detail from './Detail';
-import CreateCampaign from './CreateCampaign';
+
 import { logout } from './services/fetch-utils';
 import logo from './assets/die.png';
 import {
@@ -60,11 +60,7 @@ function App() {
               user ? <Detail/> : <Redirect to="/" />
             }
           </Route>
-          <Route exact path="/createcampaign">
-            {
-              user ? <CreateCampaign /> : <Redirect to="/" />
-            }
-          </Route>
+  
         </Switch>
       </Router>
     </div>
