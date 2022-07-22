@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 import { deleteCharacter, getSingleCard, updateCharacter } from './services/fetch-utils';
 import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import Collapsible from 'react-collapsible';
 
 export default function Detail() {
@@ -20,14 +18,6 @@ export default function Detail() {
   const [charisma, setCharisma] = useState(1);
   const [campaign, setCampaign] = useState(1);
   const [open, setOpen] = useState(false);
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
   
   const sheet = {
     
