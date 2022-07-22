@@ -40,9 +40,8 @@ export default function Auth({ setUser }) {
         <label>Password: <input onChange={e => setLoginPassword(e.target.value)} value={loginPassword} type='password'></input></label>
         <button>Log In</button>
       </form>
-      <br></br>
-      <hr></hr>
-      <br></br>
+      {/* <br> tags should be avoided--do this work in your CSS */}
+      <hr/>
       <label>Not a user already?
         <form onSubmit={handleSubmit} className='signup-form'>
           <label>Email<input onChange={e => setEmail(e.target.value)} value={email} type='email'></input></label>

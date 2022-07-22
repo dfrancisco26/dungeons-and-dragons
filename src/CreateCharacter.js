@@ -5,8 +5,9 @@ import { getRace } from './services/fetch-utils';
 import { createCharacter } from './services/fetch-utils';
 
 export default function CreateCharacter() {
-  const [dClass, setDclass] = useState([]);
-  const [dRace, setDrace] = useState([]);
+  // this naming seems a little easier for me to follow
+  const [allClasses, setAllClasses] = useState([]);
+  const [allRaces, setAllRaces] = useState([]);
   const [classInput, setClassInput] = useState('barbarian');
   const [classQuery, setClassQuery] = useState('');
   const [raceInput, setRaceInput] = useState('dwarf');
@@ -19,10 +20,7 @@ export default function CreateCharacter() {
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
 
-
-  // const race = dRace.find(singlerace => singlerace.name === raceInput); (just in case we can no longer hit the API for single races/classes)
-
-
+  // const race = allRaces.find(singlerace => singlerace.name === raceInput); (just in case we can no longer hit the API for single races/classes)
 
   const sheet = {
     name: name,
@@ -40,13 +38,13 @@ export default function CreateCharacter() {
   async function storeRaces() {
     const data = await getRace(raceQuery);
 
-    setDrace(data.results);
+    setAllRaces(data.results);
   }
 
   async function storeClasses() {
     const data = await getClass(classQuery);
    
-    setDclass(data.results);
+    setAllClasses(data.results);
   }
   
 
@@ -64,8 +62,8 @@ export default function CreateCharacter() {
     setRaceQuery(raceInput);
     const data = await getClass(classInput);
     const rdata = await getRace(raceInput);
-    setDrace(rdata.results);
-    setDclass(data.results); //this could be an issue
+    setAllRaces(rdata.results);
+    setAllClasses(data.results); //this could be an issue
     setClassInput('');
     setRaceInput('');
     setName('');
@@ -79,45 +77,65 @@ export default function CreateCharacter() {
   return (
     <div>
       <form className='createchar-form' onSubmit={handleSubmit}>
-        <label>Name:  <input id='name-input' value={name} onChange = {e => setName(e.target.value)}></input></label>
+        <label>
+            Name:  <input id='name-input' value={name} onChange = {e => setName(e.target.value)}/ >      
+        </label>
         <br></br>
-        <label>Class:  
+        <label>
+            Class:  
           <select id='class-select' required onChange={e => setClassInput(e.target.value)}>
             <option value={null}></option> 
             {
-              dClass.map((Dclass) => <option value={Dclass.data} className='class-selection' key = {Dclass.slug} > 
+              allClasses.map((Dclass) => <option value={Dclass.data} className='class-selection' key = {Dclass.slug} > 
                 {
                   Dclass.name
                 }
               </option>)
             }
-          </select></label>
+          </select>
+        </label>
         <br></br>
-        <label>Race:   
+        <label>
+            Race:   
           <select id='race-select' onChange={e => setRaceInput(e.target.value)}>
             <option value={null}></option>
             {
-              dRace.map((Drace) => <option value={Drace.data} className='race-selection' key = {Drace.slug} >
-                {
-                  Drace.name
-                }
-              </option>)
+              allRaces.map((race) =>
+                <option 
+                  value={race.data} 
+                  className='race-selection' 
+                  key={race.slug}>
+                  {race.name}
+                </option>)
             }
           </select>
+        
         </label>
-        <label>Strength</label>
-        <input id='str' value={strength} onChange={e => setStrength (e.target.value)}></input>
-        <label>Dexterity</label>
-        <input id='dex' value={dexterity} onChange={e => setDexterity (e.target.value)}></input>
-        <label>Constitution</label>
-        <input id='con' value={constitution} onChange={e => setConstitution (e.target.value)}></input>
-        <label>Intelligence</label>
-        <input id='int' value={intelligence} onChange={e => setIntelligence (e.target.value)}></input>
-        <label>Wisdom</label>
-        <input id='wis' value={wisdom} onChange={e => setWisdom (e.target.value)}></input>
-        <label>Charisma</label>
-        <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
-        <br></br>
+        <label>
+            Strength
+        </label>
+        <input id='str' value={strength} onChange={e => setStrength (e.target.value)}/ >
+        <label>
+            Dexterity
+        </label>
+        <input id='dex' value={dexterity} onChange={e => setDexterity (e.target.value)}/ >
+        <label>
+            Constitution
+        </label>
+        <input id='con' value={constitution} onChange={e => setConstitution (e.target.value)}/ >
+        <label>
+            Intelligence
+        </label>
+        <input id='int' value={intelligence} onChange={e => setIntelligence (e.target.value)}/ >
+        <label>
+            Wisdom
+        </label>
+        <input id='wis' value={wisdom} onChange={e => setWisdom (e.target.value)}/ >
+        <label>
+            Charisma
+        </label>
+        <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}/ >
+        {/* use css display:block on the button to move things to the next line  */}
         <button id='submit-button'>Submit Selection</button>
       </form>
     </div>

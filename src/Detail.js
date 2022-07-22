@@ -17,13 +17,14 @@ export default function Detail() {
   
   
   const sheet = {
-    
-    strength: strength,
-    dexterity: dexterity,
-    constitution: constitution,
-    intelligence: intelligence,
-    wisdom: wisdom,
-    charisma: charisma
+    // no need to type these twice
+    // if the key and variable match, this is shorthand for the same thing
+    strength,
+    dexterity,
+    constitution,
+    intelligence,
+    wisdom,
+    charisma
   };
 
   useEffect(() => {
@@ -65,6 +66,7 @@ export default function Detail() {
         </div>
       </div>
       <div>
+        {/* seems like a lot of copied code from the CreateCharacter page. It probably makes sense to refactor this code into a CharacterForm component for reuse (DRY code) */}
         <form id='update-abilities-form' onSubmit={handleUpdateCharacter}>
           <label>Strength</label>
           <input id='str' type='number' value={strength} onChange={e => setStrength(e.target.value)}></input>

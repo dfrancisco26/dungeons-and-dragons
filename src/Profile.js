@@ -6,12 +6,10 @@ import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const [characters, setCharacters] = useState([]);
-  
-  
 
   useEffect(() => {
     async function fetch() {
-      
+      // seems confusing that getCharacter (singluar) returns more than one character
       const data = await getCharacter();
       
       setCharacters(data);
@@ -23,12 +21,13 @@ export default function Profile() {
   
   return (
     <>
-    
-      {characters.map((character) => <Link className='card' key={`${character.id}`} to={`/detail/${character.id}`}> <div>
-        <h1>{character.name}</h1>
-        <h2>{character.race} {character.class}</h2>
-      </div>
-      </Link>)}
+      {characters.map((character) => 
+        <Link className='card' key={`${character.id}`} to={`/detail/${character.id}`}> 
+          <div>
+            <h1>{character.name}</h1>
+            <h2>{character.race} {character.class}</h2>
+          </div>
+        </Link>)}
     </>
   );
 }
