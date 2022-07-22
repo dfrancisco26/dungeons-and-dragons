@@ -94,7 +94,7 @@ body {
 
 .createchar-form {
   background-color: rgba(112, 128, 144, .85);
-  max-width: 25%;
+  max-width: 100%;
   padding: 10px;
   margin: 12px;
 }
