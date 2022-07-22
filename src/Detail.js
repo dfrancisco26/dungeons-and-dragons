@@ -17,15 +17,7 @@ export default function Detail() {
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
   const [campaign, setCampaign] = useState(1);
-  const [open, setOpen] = useState(false);
   
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   const sheet = {
     
