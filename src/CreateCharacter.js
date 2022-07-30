@@ -10,8 +10,9 @@ import Alert from '@mui/material/Alert';
 import DieRoll from './DieRoll';
 
 export default function CreateCharacter() {
-  const [dClass, setDclass] = useState([]);
-  const [dRace, setDrace] = useState([]);
+  // this naming seems a little easier for me to follow. Mysterious names like dRace and dClass would make this codebase a challenge for future coders to maintain.
+  const [allClasses, setAllClasses] = useState([]);
+  const [allRaces, setAllRaces] = useState([]);
   const [classInput, setClassInput] = useState('barbarian');
   const [classQuery, setClassQuery] = useState('');
   const [raceInput, setRaceInput] = useState('dwarf');
@@ -37,9 +38,6 @@ export default function CreateCharacter() {
     setOpen(false);
   };
 
-
-
-
   const sheet = {
     name: name,
     class: classInput,
@@ -61,13 +59,13 @@ export default function CreateCharacter() {
   async function storeRaces() {
     const data = await getRace(raceQuery);
 
-    setDrace(data.results);
+    setAllRaces(data.results);
   }
 
   async function storeClasses() {
     const data = await getClass(classQuery);
    
-    setDclass(data.results);
+    setAllClasses(data.results);
   }
   
 
@@ -85,9 +83,8 @@ export default function CreateCharacter() {
     setRaceQuery(raceInput);
     const data = await getClass(classInput);
     const rdata = await getRace(raceInput);
-    setDrace(rdata.results);
-    setDclass(data.results);
-    setOpen(true);
+    setAllRaces(rdata.results);
+    setAllClasses(data.results); //this could be an issue
     setClassInput('');
     setRaceInput('');
     setName('');
@@ -112,51 +109,63 @@ export default function CreateCharacter() {
     <div>
       <DieRoll />
       <form className='createchar-form' onSubmit={handleSubmit}>
-        <label>Name:  <input id='name-input' value={name} onChange = {e => setName(e.target.value)}></input></label>
+        <label>
+            Name:  <input id='name-input' value={name} onChange = {e => setName(e.target.value)}/ >      
+        </label>
         <br></br>
-        <label>Class:  
+        <label>
+            Class:  
           <select id='class-select' required onChange={e => setClassInput(e.target.value)}>
             <option value={null}></option> 
             {
-              dClass.map((Dclass) => <option value={Dclass.data} className='class-selection' key = {Dclass.slug} > 
+              allClasses.map((Dclass) => <option value={Dclass.data} className='class-selection' key = {Dclass.slug} > 
                 {
                   Dclass.name
                 }
               </option>)
             }
-          </select></label>
+          </select>
+        </label>
         <br></br>
-        <label>Race:   
+        <label>
+            Race:   
           <select id='race-select' onChange={e => setRaceInput(e.target.value)}>
             <option value={null}></option>
             {
-              dRace.map((Drace) => <option value={Drace.data} className='race-selection' key = {Drace.slug} >
-                {
-                  Drace.name
-                }
-              </option>)
+              allRaces.map((race) =>
+                <option 
+                  value={race.data} 
+                  className='race-selection' 
+                  key={race.slug}>
+                  {race.name}
+                </option>)
             }
           </select>
+        
         </label>
-        <label>Strength</label>
-        <input id='str' value={strength} onChange={e => setStrength (e.target.value)}></input>
+        {/* these labels are not doing anything if they do not wrap the input tag as well, like so. This way, you can now click on the word Strength to draw focus to the input. */}
+        <label>
+          Strength
+          <input id='str' value={strength} onChange={e => setStrength (e.target.value)} />
+        </label>
         <label>Dexterity</label>
-        <input id='dex' value={dexterity} onChange={e => setDexterity (e.target.value)}></input>
+        <input id='dex' value={dexterity} onChange={e => setDexterity (e.target.value)} />
         <label>Constitution</label>
-        <input id='con' value={constitution} onChange={e => setConstitution (e.target.value)}></input>
+        <input id='con' value={constitution} onChange={e => setConstitution (e.target.value)} />
         <label>Intelligence</label>
-        <input id='int' value={intelligence} onChange={e => setIntelligence (e.target.value)}></input>
+        <input id='int' value={intelligence} onChange={e => setIntelligence (e.target.value)} />
         <label>Wisdom</label>
-        <input id='wis' value={wisdom} onChange={e => setWisdom (e.target.value)}></input>
+        <input id='wis' value={wisdom} onChange={e => setWisdom (e.target.value)} />
         <label>Charisma</label>
-        <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
+        <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)} />
         <label>Campaign
           <select id='camp-select' onChange={e => setCurrentCampaign(e.target.value)}>
             <option value={null}></option> 
             {
-              campaign.map((Camp) => <option value={Camp.id} className='camp-selection' key={Camp.id + Camp.campaign} > 
+              // be careful about capitalization--capitalized words have a specific meaning in javascript that you are not pointing to here
+              campaign.map((camp) => <option value={camp.id} className='camp-selection' key={camp.id + camp.campaign} > 
                 {
-                  Camp.campaign
+                  camp.campaign
                 }
               </option>)
             }

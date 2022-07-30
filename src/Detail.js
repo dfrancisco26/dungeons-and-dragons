@@ -20,14 +20,14 @@ export default function Detail() {
   
 
   const sheet = {
-    
-    strength: strength,
-    dexterity: dexterity,
-    constitution: constitution,
-    intelligence: intelligence,
-    wisdom: wisdom,
-    charisma: charisma,
-    campaign: campaign
+    // no need to type these twice
+    // if the key and variable match, this is shorthand for the same thing
+    strength,
+    dexterity,
+    constitution,
+    intelligence,
+    wisdom,
+    charisma
   };
 
   useEffect(() => {
@@ -76,7 +76,9 @@ export default function Detail() {
           <p>Campaign: {character.campaign}</p>
         </div>
       </div>
+
       <Collapsible trigger="Update Character" className='collapsible'>
+        {/* seems like a lot of copied code from the CreateCharacter page. It probably makes sense to refactor this code into a CharacterForm component for reuse (DRY code) */}
         <div id='ab-div'>
           <form id='update-form' onSubmit={handleUpdateCharacter}>
             <label>Strength</label>
