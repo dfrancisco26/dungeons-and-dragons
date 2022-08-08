@@ -1,3 +1,4 @@
+import elf from './assets/human.png';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -65,6 +66,7 @@ export default function Detail() {
         <div id='char-info'>
           <h1 id='char-name'>{character.name}</h1>
           <h2 id='char-rc'>{character.race} {character.class}</h2>
+          <img id='char-img' src={elf} />
         </div>
         <div id='abilities'>
           <p>Strength: {character.strength}</p>

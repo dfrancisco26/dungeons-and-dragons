@@ -1,6 +1,6 @@
 body {
   background: url(../src/assets/gates.jpg);
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -45,7 +45,7 @@ body {
 }
 
 .die {
-  height: 100px;
+  height: 120px;
   animation: infinite-spinning 3s;
   animation-iteration-count: infinite;
 
@@ -72,6 +72,7 @@ body {
   justify-content: center;
   margin-top: 20px;
   margin-left: 20px;
+  padding-bottom: 10px;
 }
 
 #profile-link {
@@ -252,4 +253,9 @@ body {
   #die-result{
     color: whitesmoke; 
     margin-left: 12px;
+  }
+
+
+  #char-img {
+    width: 120px;
   }
