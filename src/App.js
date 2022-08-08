@@ -6,6 +6,7 @@ import Profile from './Profile';
 import { client } from './services/client';
 import Detail from './Detail';
 import { logout } from './services/fetch-utils';
+import logo from './assets/die.png';
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,26 +29,25 @@ function App() {
     <div className="App">
       <Router>
         <div className='navigation'>
-          <nav>
-            <span id='profile-link'><Link to ="/Profile">Profile</Link></span>
-            <span id='charcreate-link'></span><Link to = "/CreateCharacter">Create a new character</Link>
-            {user && 
+          <Link id='profile-link' to ="/profile">Profile</Link>
+          <Link id='create-link' to = "/createcharacter">Create a new character</Link>
+          
+          {user && 
           <button id='logout-button' onClick={handleLogoutClick}>Logout</button>}
-          </nav>
         </div>
-        <img className='die' src='https://clipart.world/wp-content/uploads/2021/05/D20-clipart-transparent-png-4.png' alt='die'></img>
+        <img className='die' src={logo} alt='die'></img>
         <Switch>
           <Route exact path="/">
             {
-              !user ? <Auth setUser={setUser} /> : <Redirect to="/" />
+              !user ? <Auth setUser={setUser} /> : <Redirect to="/profile" />
             }
           </Route>
-          <Route exact path="/CreateCharacter">
+          <Route exact path="/createcharacter">
             {
               user ? <CreateCharacter /> : <Redirect to="/" />
             }
           </Route>
-          <Route exact path="/Profile">
+          <Route exact path="/profile">
             {
               user ? <Profile /> : <Redirect to="/" />
             }

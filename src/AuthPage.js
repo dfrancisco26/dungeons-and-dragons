@@ -41,7 +41,7 @@ export default function Auth({ setUser }) {
         <button>Log In</button>
       </form>
       <br></br>
-      <hr></hr>
+      
       <br></br>
       <label>Not a user already?
         <form onSubmit={handleSubmit} className='signup-form'>

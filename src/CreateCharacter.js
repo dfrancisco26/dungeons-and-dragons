@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { checkError } from './services/client';
 import { getClass } from './services/fetch-utils';
 import { getRace } from './services/fetch-utils';
-import { createCharacter } from './services/fetch-utils';
+import { createCharacter, getCamp } from './services/fetch-utils';
+import { useHistory } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import DieRoll from './DieRoll';
 
 export default function CreateCharacter() {
   const [dClass, setDclass] = useState([]);
@@ -18,9 +23,20 @@ export default function CreateCharacter() {
   const [intelligence, setIntelligence] = useState(1);
   const [wisdom, setWisdom] = useState(1);
   const [charisma, setCharisma] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [campaign, setCampaign] = useState([]);
+  const [campQuery, setCampQuery] = useState('');
+  const [currentCampaign, setCurrentCampaign] = useState(1);
+  const { push } = useHistory();
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
 
-  // const race = dRace.find(singlerace => singlerace.name === raceInput); (just in case we can no longer hit the API for single races/classes)
+    setOpen(false);
+  };
+
 
 
 
@@ -33,10 +49,15 @@ export default function CreateCharacter() {
     constitution: constitution,
     intelligence: intelligence,
     wisdom: wisdom,
-    charisma: charisma
+    charisma: charisma,
+    campaign: currentCampaign
+  
   };
 
-
+  async function storeCamp() {
+    const data = await getCamp(campQuery);
+    setCampaign(data);
+  }
   async function storeRaces() {
     const data = await getRace(raceQuery);
 
@@ -53,9 +74,9 @@ export default function CreateCharacter() {
   useEffect(() => {
     storeClasses();
     storeRaces();
+    storeCamp();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // might need separate useEffect for races
-
+  }, []);
   async function handleSubmit(e) {
 
     e.preventDefault();
@@ -65,19 +86,31 @@ export default function CreateCharacter() {
     const data = await getClass(classInput);
     const rdata = await getRace(raceInput);
     setDrace(rdata.results);
-    setDclass(data.results); //this could be an issue
+    setDclass(data.results);
+    setOpen(true);
     setClassInput('');
     setRaceInput('');
     setName('');
+    setStrength(1);
+    setDexterity(1);
+    setIntelligence(1);
+    setConstitution(1);
+    setWisdom(1);
+    setCharisma(1);
+    setCurrentCampaign(1);
+    setCampQuery();
+
     
 
     const response = await createCharacter(sheet);
+    push('/profile');
     return checkError(response);
   }
 
 
   return (
     <div>
+      <DieRoll />
       <form className='createchar-form' onSubmit={handleSubmit}>
         <label>Name:  <input id='name-input' value={name} onChange = {e => setName(e.target.value)}></input></label>
         <br></br>
@@ -117,8 +150,28 @@ export default function CreateCharacter() {
         <input id='wis' value={wisdom} onChange={e => setWisdom (e.target.value)}></input>
         <label>Charisma</label>
         <input id='cha' value={charisma} onChange={e => setCharisma (e.target.value)}></input>
+        <label>Campaign
+          <select id='camp-select' onChange={e => setCurrentCampaign(e.target.value)}>
+            <option value={null}></option> 
+            {
+              campaign.map((Camp) => <option value={Camp.id} className='camp-selection' key={Camp.id + Camp.campaign} > 
+                {
+                  Camp.campaign
+                }
+              </option>)
+            }
+          </select>
+        </label>
         <br></br>
-        <button id='submit-button'>Submit Selection</button>
+        
+        <Button variant="contained" sx={{ backgroundColor: 'DarkSlateGray', color: 'antiquewhite' }} onClick={handleSubmit}>
+        Submit
+        </Button>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          You successfully created a character!
+          </Alert>
+        </Snackbar>
       </form>
     </div>
 
