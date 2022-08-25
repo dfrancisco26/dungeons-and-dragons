@@ -27,7 +27,8 @@ export async function logout() {
 }
 
 
-export async function getClass() {
+// seems like this returns all classes, so the function should be plural
+export async function getClasses() {
   const rawData = await fetch(`/.netlify/functions/dnd?classes`);
   
   const { data } = await rawData.json();
@@ -44,7 +45,8 @@ export async function getCampaigns() {
   return checkError(response); 
 }
 
-export async function getRace() {
+// seems like this returns all races, so the function should be plural
+export async function getRaces() {
   const rawData = await fetch(`/.netlify/functions/dndr?races`);
 
   const { data } = await rawData.json();
@@ -58,7 +60,8 @@ export async function createCharacter(sheet) {
   return checkError(response);
 }
 
-export async function getCharacter() {
+// seems like this returns all characters for a given user, so the function should be plural
+export async function getCharacters() {
   const response = await client
     .from('sheets')
     .select('*');

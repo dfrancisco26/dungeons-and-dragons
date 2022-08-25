@@ -40,9 +40,9 @@ export default function Auth({ setUser }) {
         <label>Password: <input onChange={e => setLoginPassword(e.target.value)} value={loginPassword} type='password'></input></label>
         <button>Log In</button>
       </form>
-      <br></br>
-      
-      <br></br>
+      {/* <br> tags should be avoided--do this work in your CSS */}
+      {/* I'm seeing a lot of <input></input>, <hr></hr>, etc where I should be seeing <input />, <hr/>, etc. Notice when you are using a self-closing tag. No html should ever have a tag with no-children. If a tag has no children, make it self-closing. */}
+      <hr/>
       <label>Not a user already?
         <form onSubmit={handleSubmit} className='signup-form'>
           <label>Email<input onChange={e => setEmail(e.target.value)} value={email} type='email'></input></label>

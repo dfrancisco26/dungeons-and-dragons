@@ -1,3 +1,5 @@
+// i would make this file called dnd-races.js, for ease of maintainability
+
 const fetch = require('node-fetch');
 require('dotenv').config();
 

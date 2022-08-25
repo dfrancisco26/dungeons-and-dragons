@@ -1,3 +1,9 @@
+/* 
+Your component file structure and component tree are clean and managable, and your code works without bugs, so great work! There are some maintainability issues related to naming and repitition throughout your code, but generally speaking I'd find it a pleasure to work in this codebase if I were assigned to maintain it in the future. I would have liked to see you hit more stretch goals and add some more ambitious features, but this is a great foundation for a more complex app later on. I look forward to see what y'all do in the future after a few mon.
+
+One note: Please be more conscious of your naming decisions in branches. I initially gave feedback on your main branch before i noticed there were 4 other branches: Dav, DavR, devDs and spm. I'm assuming DavR is the one you want me to grade since it has the most recent commits, but how in the world would anybody know that looking at these names? 
+*/
+
 import './App.css';
 import Auth from './AuthPage';
 import { useState } from 'react';
